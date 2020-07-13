@@ -1,0 +1,23 @@
+{
+    "training_params" : {
+        "learning_rate": 5e-5,
+        "batch_size": 16,
+        "make_patches": false,
+        "training_margin" : 0,
+        "n_epochs": 10,
+        "data_augmentation" : true,
+        "data_augmentation_max_rotation" : 0.2,
+        "data_augmentation_max_scaling" : 0.2,
+        "data_augmentation_flip_lr": false,
+        "data_augmentation_flip_ud": false,
+        "data_augmentation_color": false,
+        "evaluate_every_epoch" : 1
+    },
+    "pretrained_model_name" : "resnet50",
+    "prediction_type": "CLASSIFICATION",
+    "train_data" : "data/train",
+    "eval_data" : "data/val",
+    "classes_file" : "data/classes.txt",
+    "model_output_dir" : "june10-model2/",
+    "gpu" : "0"
+  }
