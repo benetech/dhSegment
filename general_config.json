@@ -3,7 +3,7 @@
       "learning_rate": 1e-5,
       "batch_size": 2,
       "make_patches": false,
-      "n_epochs": 30,
+      "n_epochs": 10,
       "data_augmentation" : true,
       "data_augmentation_max_rotation" : 0.2,
       "data_augmentation_max_scaling" : 0.2,
@@ -25,9 +25,9 @@
   },
   "pretrained_model_name" : "resnet50",
   "prediction_type" : "CLASSIFICATION",
-  "train_data" : "../TextbookSegmentation/data_onemath/train",
-  "eval_data" : "../TextbookSegmentation/data_onemath/val",
-  "classes_file" : "../TextbookSegmentation/mturk/class_names",
-  "model_output_dir" : "july27-model/",
+  "train_data" : "../TextbookSegmentation/novel_data/train",
+  "eval_data" : "../TextbookSegmentation/novel_data/val",
+  "classes_file" : "../TextbookSegmentation/mturk/colors_novel.txt",
+  "model_output_dir" : "novel-aug07-model/",
   "gpu" : "0"
 }
