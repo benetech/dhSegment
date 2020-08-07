@@ -20,15 +20,50 @@ PAGE_XML_DIR = './page_xml'
 
 #the colors corresponding to our classes
 colors = [
-    (255, 255, 255),
-    (51, 102, 0),
-    (6, 131, 255),
-    (255, 189, 6),
-    (255, 6, 6),
-    (198, 6, 255),
-    (134, 107, 46),
-    (255, 148, 234),
+    (255, 255, 255), 
+    (51, 102, 0), 
+    (6, 131, 255), 
+    (255, 189, 6), 
+    (255, 6, 6), 
+    (198, 6, 255), 
+    (134, 107, 46), 
+    (255, 148, 234), 
     (128, 128, 128)
+]
+
+#mapping between indices and class names
+num_to_class = {0:"Background", 
+                1:"Header", 
+                2:"Text", 
+                3:"Image", 
+                4:"Math (block)", 
+                5:"Math (inline)", 
+                6:"Table", 
+                7:"Page Number", 
+                8:"Caption"}
+
+thresholds = [
+    0,      #bg
+    0.4,    #header
+    0.3,    #text
+    0.4,    #image
+    0.4,    #block math
+    0.3,    #inline math
+    0.4,    #table
+    0.4,    #page number
+    0.4     #caption
+]
+
+min_areas = [
+    0.001,      #bg
+    0.00075,    #header
+    0.00006,    #text
+    0.001,      #image
+    0.001,      #block math
+    0.0005,     #inline math
+    0.005,      #table
+    0.0006,     #page number
+    0.001       #caption
 ]
 
 def page_make_binary_mask(probs: np.ndarray, threshold: float=-1) -> np.ndarray:
@@ -71,7 +106,7 @@ def main(args):
     model_dir = args[1]
     
 
-    input_files = glob(args[2] + "Algebra*")
+    input_files = glob(args[2] + "*.png")
 
     output_dir = args[3]
     print("output_dir: ", output_dir)
@@ -100,7 +135,7 @@ def main(args):
                 new_probs = new_probs / np.max(new_probs)  # Normalize to be in [0, 1]
 
                 # Binarize the predictions
-                page_bin = page_make_binary_mask(new_probs, threshold=0.5)
+                page_bin = page_make_binary_mask(new_probs, threshold=thresholds[cat])
 
                 # # Upscale to have full resolution image (cv2 uses (w,h) and not (h,w) for giving shapes)
                 bin_upscaled = cv2.resize(page_bin.astype(np.uint8, copy=False),
@@ -108,7 +143,7 @@ def main(args):
 
                 #find the bounding boxes
                 # pred_page_coords = polygon_detection.find_polygonal_regions(bin_upscaled)
-                pred_page_coords = bb_detection.find_bounding_boxes(bin_upscaled,min_area=0.001)
+                pred_page_coords = bb_detection.find_bounding_boxes(bin_upscaled,min_area=min_areas[cat])
 
                 print('ppc\n\n\n',pred_page_coords)
                 # Draw page box on original image and export it. Add also box coordinates to the txt file
@@ -120,7 +155,7 @@ def main(args):
                         cv2.polylines(original_img,[box],True,colors[cat], 5)
                         # Write the points to a text file
                         # txt_coordinates += '{},{},{},{},\n'.format(filename,box[0],box[1],cat)
-                        output.append([filename,box[0][0],box[0][1],box[1][0],box[1][1],box[2][0],box[2][1],box[3][0],box[3][1],cat])
+                        output.append([filename,box[0][0], box[0][1], box[2][0], box[2][1], cat])
                         # Create page region and XML file
                         # page_border = PAGE.Border(coords=PAGE.Point.cv2_to_point_list(box[:, None, :]))
                 else:
