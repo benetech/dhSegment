@@ -1,10 +1,9 @@
 {
   "training_params" : {
       "learning_rate": 1e-5,
-      "batch_size": 16,
-      "make_patches": true,
-      "n_epochs": 30,
-      "patch_shape": [300, 300],
+      "batch_size": 2,
+      "make_patches": false,
+      "n_epochs": 10,
       "data_augmentation" : true,
       "data_augmentation_max_rotation" : 0.2,
       "data_augmentation_max_scaling" : 0.2,
@@ -25,6 +24,10 @@
     ]
   },
   "pretrained_model_name" : "resnet50",
-  "prediction_type": "CLASSIFICATION",
+  "prediction_type" : "CLASSIFICATION",
+  "train_data" : "../TextbookSegmentation/data/train",
+  "eval_data" : "../TextbookSegmentation/data/val",
+  "classes_file" : "../TextbookSegmentation/mturk/colors.txt",
+  "model_output_dir" : "aug10-model/",
   "gpu" : "0"
 }
