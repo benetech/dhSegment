@@ -25,9 +25,9 @@
   },
   "pretrained_model_name" : "resnet50",
   "prediction_type" : "CLASSIFICATION",
-  "train_data" : "../TextbookSegmentation/data/train",
-  "eval_data" : "../TextbookSegmentation/data/val",
-  "classes_file" : "../TextbookSegmentation/mturk/colors.txt",
-  "model_output_dir" : "aug11-model/",
+  "train_data" : "../TextbookSegmentation/novel_data/train",
+  "eval_data" : "../TextbookSegmentation/novel_data/val",
+  "classes_file" : "../TextbookSegmentation/mturk/colors_novel.txt",
+  "model_output_dir" : "aug10-novel-model/",
   "gpu" : "0"
 }
