@@ -43,6 +43,7 @@ To bring in all DVC managed project componenets, run the following command. Note
 ```
 dvc pull
 ```
+Note that you may already have these data in TextbookSegmentationDatasetGenerator, so you could save some disk space by just pathing to that directory in the config file.
 
 
 ## Training
@@ -55,22 +56,22 @@ There is an option to use a pretrained VGG model. We did not experiment with thi
 
 
 ```
-python3 dhSegment/train.py with config.json
+python3 dhSegment/train.py with general_config.json
 ```
 
-If you are training on your own dataset, you will need to adjust data/classes.txt to reflect your dataset. 
-
+If you are training on your own dataset, you will need to adjust data/classes.txt to reflect your dataset. We do this for our dataset of novels with our novel_config.json.
 
 ## Inference/Visualization
 
-visualize.py will take in a model, an image directory, and an output directory. It will segment each page, then draw the bounding boxes onto the image and export them. It will also export an txt file containing each bounding box's pixel coordinates and an xml file for each image containing the coordinates of each box.
+visualize.py will take in a model, an image directory, and an output directory. It will segment each page, then draw the bounding boxes onto the image and export them. It will also export a txt file containing each bounding box's pixel coordinates and an xml file for each image containing the coordinates of each box.
 
 ```
 python3 dhSegment/visualize.py <model_directory> <image_directory> <output_directory> 
 ```
 
+## Changes from vanilla dhSegment
+We added visualize.py, described above.
 
+We moved bb_detection.py from somewhere else in the code to its current location. 
 
-
-
-
+We also edited general_config.json to suit the needs of our textbook dataset and we created novel_config.json for our novel dataset.
