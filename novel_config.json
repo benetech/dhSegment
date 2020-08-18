@@ -28,6 +28,6 @@
   "train_data" : "../TextbookSegmentation/novel_data/train",
   "eval_data" : "../TextbookSegmentation/novel_data/val",
   "classes_file" : "../TextbookSegmentation/mturk/colors_novel.txt",
-  "model_output_dir" : "aug13-novel-model/",
+  "model_output_dir" : "aug17-novel-model/",
   "gpu" : "0"
 }
