@@ -1,7 +1,3 @@
-md5: f8cc0359790d1fb46a2e8758d2ada3df
 outs:
 - md5: 0d0cd03a13f47148422176e15c2165fe.dir
   path: aug17-novel-model
-  cache: true
-  metric: false
-  persist: false
