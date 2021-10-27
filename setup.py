@@ -23,7 +23,8 @@ setup(
         "sacred==0.7.4",  # 0.7.5 causes an error
         "requests>=2.21.0",
         "click>=7.0",
-        "tensorflow==2.6.0",
+        "tensorflow==2.7.0rc1",
+		"numpy==1.21.3"
     ],
     extras_require={
         "doc": [
